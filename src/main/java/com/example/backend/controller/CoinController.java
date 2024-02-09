@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/coins")
 public class CoinController {
@@ -27,6 +28,15 @@ public class CoinController {
 
     }
 
+    @GetMapping("/{coin_id}")
+    public ResponseEntity<Coin> getCoinById(@PathVariable Integer coin_id) {
+        Optional<Coin> coinOptional = coinService.getCoinById(coin_id);
+        if (coinOptional.isPresent()) {
+            return ResponseEntity.ok(coinOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @PutMapping("/{coin_id}")
 
     public Coin updateCoin(@PathVariable Integer coin_id ,@RequestBody Coin updatedCoin){
