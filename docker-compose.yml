@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  database:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MYSQL_DATABASE: TradingDashboard
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
+    driver: local
