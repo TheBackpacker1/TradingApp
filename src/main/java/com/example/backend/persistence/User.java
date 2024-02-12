@@ -12,16 +12,17 @@ public class User {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Integer user_id ;
 
+ @Column(nullable = false, length = 100)
+ private String username;
 
+ @Column(nullable = false, length = 100)
+ private String password;
 
-private  String username ;
-private  String password ;
-
-private  String complete_name ;
-
-private UserStatus status ;
-
-
+ @Column(nullable = true, length = 100)
+ private String complete_name;
+ @Column(name = "status", nullable = false)
+ @Enumerated(EnumType.STRING)
+ private UserStatus status;
  public Integer getUser_id() {
   return user_id;
  }
@@ -47,7 +48,9 @@ private UserStatus status ;
  }
 
 
-
+ public UserStatus getStatus() {
+  return status;
+ }
  public void setStatus(UserStatus status) {
   this.status = status;
  }
@@ -55,13 +58,11 @@ private UserStatus status ;
  public String getComplete_name() {
   return complete_name;
  }
-
- public UserStatus getStatus() {
-  return status;
- }
-
  public void setComplete_name(String complete_name) {
   this.complete_name = complete_name;
 
  }
+
+
+
 }
