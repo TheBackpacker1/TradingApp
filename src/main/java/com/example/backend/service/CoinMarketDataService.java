@@ -51,7 +51,7 @@ public class CoinMarketDataService {
                 coinMarketData.setCoin_id(Integer.parseInt(map.get("coin_id").toString()));
                 coinMarketData.setSyncDate(LocalDateTime.now());
                 coinMarketData.setAth(new BigDecimal(map.get("ath").toString()));
-                coinMarketData.setAthMc(new BigDecimal(map.get("ath_market_cap").toString()));
+                coinMarketData.setAthMarketCap(new BigDecimal(map.get("ath_market_cap").toString()));
                 coinMarketData.setCirculatingSupply(new BigDecimal(map.get("circulating_supply").toString()));
                 coinMarketData.setTotalSupply(new BigDecimal(map.get("total_supply").toString()));
                 coinMarketData.setMaxSupply(new BigDecimal(map.get("max_supply").toString()));
