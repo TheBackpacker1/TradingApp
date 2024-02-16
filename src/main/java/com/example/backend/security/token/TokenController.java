@@ -3,9 +3,10 @@ package com.example.backend.security.token;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.backend.security.user.User;
+import com.example.backend.security.user.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solidcode.SCTradingBot.security.user.User;
-import com.solidcode.SCTradingBot.security.user.UserRepo;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,16 +29,15 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class TokenController {
 
     private final UserRepo userRepo;
+    private final Token token; // Add this line
 
     @GetMapping("/refresh")
-    //@Operation(hidden = true)
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
                 String refresh_token = authorizationHeader.substring("Bearer ".length());
-                OAuth2AuthorizationServerProperties.Token token = new OAuth2AuthorizationServerProperties.Token();
-                JWTVerifier verifier = JWT.require(token.getAlgorithm()).build();
+                JWTVerifier verifier = JWT.require(token.getAlgorithm()).build(); // Modify this line
                 DecodedJWT decodedJWT = verifier.verify(refresh_token);
                 String username = decodedJWT.getSubject();
                 User user = userRepo.findUserByUsername(username);

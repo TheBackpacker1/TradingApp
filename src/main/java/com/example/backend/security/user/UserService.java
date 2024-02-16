@@ -17,19 +17,19 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final com.solidcode.SCTradingBot.security.user.UserRepo userRepo;
+    private final com.example.backend.security.user.UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.solidcode.SCTradingBot.security.user.User user = getUser(username);
+        com.example.backend.security.user.User user = getUser(username);
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ALL"));
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 
-    public com.solidcode.SCTradingBot.security.user.User getUser(String userName) {
-        com.solidcode.SCTradingBot.security.user.User user = userRepo.findUserByUsername(userName);
+    public com.example.backend.security.user.User getUser(String userName) {
+        com.example.backend.security.user.User user = userRepo.findUserByUsername(userName);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "User not Found.");
         }

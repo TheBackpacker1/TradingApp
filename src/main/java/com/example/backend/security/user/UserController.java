@@ -1,7 +1,5 @@
 package com.example.backend.security.user;
 
-import com.example.backend.pp.user.User;
-import com.example.backend.pp.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;

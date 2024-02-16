@@ -1,8 +1,8 @@
 package com.example.backend.security.filter;
 
+
+import com.example.backend.security.user.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solidcode.SCTradingBot.security.token.Token;
-import com.solidcode.SCTradingBot.security.user.UserRepo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import com.example.backend.security.token.Token;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.MimeTypeUtils;
@@ -46,7 +48,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
         Token token = new Token();
         Map<String, String> tokens = new HashMap<>();
-        authUser = userRepo.findUserByUsername(user.getUsername());
+        com.example.backend.security.user.User authUser = userRepo.findUserByUsername(user.getUsername());
         tokens.put("access_token", token.createAccessToken(authUser, request.getRequestURL().toString()));
         tokens.put("refresh_token", token.createRefreshToken(authUser, request.getRequestURL().toString()));
         response.setContentType(APPLICATION_JSON_VALUE);

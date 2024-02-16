@@ -1,4 +1,4 @@
-package com.solidcode.SCTradingBot.security.user;
+package com.example.backend.security.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

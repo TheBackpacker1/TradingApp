@@ -1,13 +1,15 @@
-package com.solidcode.SCTradingBot.security.token;
+package com.example.backend.security.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.solidcode.SCTradingBot.security.user.User;
+import com.example.backend.security.user.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class Token {
 
     private final Algorithm algorithm;

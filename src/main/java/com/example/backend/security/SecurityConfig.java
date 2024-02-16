@@ -3,7 +3,7 @@ package com.example.backend.security;
 
 import com.example.backend.security.filter.CustomAuthenticationFilter;
 import com.example.backend.security.filter.CustomAuthorizationFilter;
-import com.solidcode.SCTradingBot.security.user.UserRepo;
+import com.example.backend.security.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
