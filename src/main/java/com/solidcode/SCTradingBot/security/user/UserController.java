@@ -33,5 +33,12 @@ public class UserController {
         com.solidcode.SCTradingBot.security.user.User savedUser = userService.createUser(user.getUsername(), user);
         return ResponseEntity.ok().body(savedUser);
     }
+ /*   @PutMapping("/updateUser/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody com.solidcode.SCTradingBot.security.user.User user) {
+        // Update the user in the database
+        User updatedUser = userService.updateUserByUsername(username, user);
 
+        // Return the updated user in the response
+        return ResponseEntity.ok().body(updatedUser);
+    }*/
 }

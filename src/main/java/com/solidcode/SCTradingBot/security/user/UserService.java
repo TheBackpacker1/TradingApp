@@ -47,6 +47,20 @@ public class UserService implements UserDetailsService {
         return userRepo.save(user);
     }
 
+    public com.solidcode.SCTradingBot.security.user.User updateUserByUsername(String username, User user) {
+        // Retrieve the existing user from the database
+        com.solidcode.SCTradingBot.security.user.User existingUser = userRepo.findUserByUsername(username);
+
+        // Update the user properties
+        existingUser.setUsername(user.getUsername());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setCompleteName(user.getCompleteName());
+        existingUser.setStatus(user.getStatus());
+        existingUser.setRoles(user.getRoles());
+
+        // Save the updated user to the database
+        return userRepo.save(existingUser);
+    }
 
 
 
