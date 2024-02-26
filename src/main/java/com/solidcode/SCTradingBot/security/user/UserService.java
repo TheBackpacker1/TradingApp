@@ -1,5 +1,4 @@
 package com.solidcode.SCTradingBot.security.user;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
         return userRepo.save(user);
     }
 
-    public com.solidcode.SCTradingBot.security.user.User updateUserByUsername(String username, User user) {
+    public com.solidcode.SCTradingBot.security.user.User updateUserByUsername(String username, com.solidcode.SCTradingBot.security.user.User user) {
         // Retrieve the existing user from the database
         com.solidcode.SCTradingBot.security.user.User existingUser = userRepo.findUserByUsername(username);
 
@@ -62,6 +62,13 @@ public class UserService implements UserDetailsService {
         return userRepo.save(existingUser);
     }
 
-
-
+    public void deleteUserByUsername(@PathVariable String username) {
+        com.solidcode.SCTradingBot.security.user.User user = userRepo.findUserByUsername(username);
+        if (user != null) {
+            userRepo.delete(user);
+        } else {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+    }
 }
+

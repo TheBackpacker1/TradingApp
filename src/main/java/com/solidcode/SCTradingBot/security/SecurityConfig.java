@@ -38,8 +38,10 @@ public class SecurityConfig {
         http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS));
         http.authorizeHttpRequests(request -> request.requestMatchers("/token/**").permitAll());
         http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/createUser").permitAll());
-        http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/**").hasAuthority("ALL"));
+        http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/updateUser/**").permitAll());
+        http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/deleteUser/**").permitAll());
         loadApiAccessPermissions(http);
+        http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/**").hasAuthority("ALL"));
         http.authorizeHttpRequests(request -> request.requestMatchers("api/v1/bot/users/**")
                 .permitAll().anyRequest().authenticated());
         http.addFilter(customAuthenticationFilter);
